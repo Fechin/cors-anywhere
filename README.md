@@ -168,6 +168,15 @@ node server.js
 ```
 
 
+#### Dockerfile
+
+You also can use the Dockerfile to build your own docker image and start CORS Anywhere server in a container:
+```
+docker build -t cors-anywhere .
+docker run -d -p 8080:8080 --name cors-anywhere -e CORSANYWHERE_WHITELIST=https://example.com,http://example.com,http://example.com:8080 cors-anywhere
+```
+
+
 ## License
 
 Copyright (C) 2013 - 2021 Rob Wu <rob@robwu.nl>
