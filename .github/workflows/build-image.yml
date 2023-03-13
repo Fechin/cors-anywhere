@@ -44,7 +44,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           file: ./Dockerfile
           tags: |
-              ghcr.io/fechin/${{ env.IMAGE_NAME }}:latest
+              ghcr.io/${{ github.actor }}/${{ env.IMAGE_NAME }}:latest
 
         # Delete all pre-release package versions except latest 5
     - uses: actions/delete-package-versions@v3
