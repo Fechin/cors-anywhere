@@ -43,7 +43,8 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           file: ./Dockerfile
-          tags: ghcr.io/${{ github.actor | lower }}/${{ env.IMAGE_NAME }}:latest
+          tags: |
+            ghcr.io/${{ github.actor | lower }}/${{ env.IMAGE_NAME }}:latest
 
         # Delete all pre-release package versions except latest 5
     - uses: actions/delete-package-versions@v3
