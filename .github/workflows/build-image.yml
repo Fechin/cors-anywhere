@@ -1,17 +1,17 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 
-name: Deploy in Fabric
+name: Build docker image
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master" ]
 
 env:
     TZ: Asia/Shanghai
-    IMAGE_NAME: uptool
+    IMAGE_NAME: cors-anywhere
 
 permissions:
   contents: read
@@ -23,48 +23,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-
-    - name: Set up Node 16.13.1
-      uses: actions/setup-node@v3.5.1
-      with:
-        node-version: 16.13.1
-
-    - name: Install Node Dependencies
-      run: |
-        yarn install
-
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
-
-    - name: Install Python Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install fabric requests
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-    - name: Setup Hugo latest
-      uses: peaceiris/actions-hugo@v2
-      with:
-        hugo-version: 'latest'
-
-    - name: Install SSH key
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{ secrets.KEY }}
-        known_hosts: ${{ secrets.HOST}}
-
-    - name: Set up Swap Space
-      uses: thejerrybao/setup-swap-space@v1
-      with:
-        swap-space-path: /swapfile
-        swap-size-gb: 8
-        remove-existing-swap-files: true
-
-    - name: Deploy in Fabric
-      run: |
-        fab build
 
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
@@ -88,7 +46,7 @@ jobs:
           tags: |
               ghcr.io/fechin/${{ env.IMAGE_NAME }}:latest
 
-        # Delete all pre-release package versions except latest 55555
+        # Delete all pre-release package versions except latest 5
     - uses: actions/delete-package-versions@v3
       with:
           package-name: ${{ env.IMAGE_NAME }}
