@@ -1,0 +1,11 @@
+node_modules/
+test
+*.log
+Dockerfile*
+README.md
+LICENSE
+
+.idea/
+.github/
+.travis.yml
+.eslintignore
