@@ -4,6 +4,7 @@ test
 Dockerfile*
 README.md
 LICENSE
+node_modules
 
 .idea/
 .github/
