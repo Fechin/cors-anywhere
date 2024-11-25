@@ -13,5 +13,4 @@ WORKDIR /app
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
 EXPOSE 4000
-HEALTHCHECK --interval=1s --timeout=3s CMD wget -q -O - http://localhost:4000 || exit 1
 CMD ["yarn", "start"]
